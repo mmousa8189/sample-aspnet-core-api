@@ -25,8 +25,10 @@ namespace sample_aspnet_core_api.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        [Produces("application/json")]
+        public IActionResult Post([FromBody]Value model)
         {
+            return CreatedAtAction("GET", new { id = model.Id }, model);
         }
 
         // PUT api/values/5
@@ -40,5 +42,12 @@ namespace sample_aspnet_core_api.Controllers
         public void Delete(int id)
         {
         }
+
     }
+    public class Value
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+
 }
